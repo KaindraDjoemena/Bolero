@@ -1,6 +1,6 @@
 // ui/ui.cpp
 
-#include "UI.hpp"
+#include "ui.hpp"
 
 #include <algorithm>
 

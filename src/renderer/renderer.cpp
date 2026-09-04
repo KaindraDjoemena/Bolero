@@ -12,7 +12,7 @@
 #include "utils/debug.hpp"
 
 #include <algorithm>
-#include <glfw/glfw3.h>
+#include <GLFW/glfw3.h>
 
 
 namespace blr::core

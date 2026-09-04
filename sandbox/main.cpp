@@ -17,6 +17,33 @@ namespace blra = blr::app;
     }
 #endif
 
+#ifdef __linux__
+    #include <cstdlib>
+    #include <fstream>
+
+    namespace
+    {
+
+    struct LinuxDgpuPreference
+    {
+        LinuxDgpuPreference()
+        {
+            std::ifstream nv("/proc/driver/nvidia/version");
+            
+            if (nv.good())
+            {
+                setenv("__NV_PRIME_RENDER_OFFLOAD", "1", 0);
+                setenv("__GLX_VENDOR_LIBRARY_NAME", "nvidia", 0);
+                setenv("__VK_LAYER_NV_optimus", "NVIDIA_only", 0);
+            }
+
+            setenv("DRI_PRIME", "1", 0);
+        }
+    } s_linuxDgpuPreference;
+
+    } /* empty namespce */
+#endif
+
 constexpr int         DEFAULT_WINDOW_WIDTH  = 1280;
 constexpr int         DEFAULT_WINDOW_HEIGHT = 720;
 constexpr const char* DEFAULT_WINDOW_TITLE  = "Bolero: Renderer";
